@@ -95,10 +95,9 @@ function FieldParamEditor({
       label={customLabel || label}
       isInvalid={!isValid}
       fullWidth={true}
-      compressed
     >
       <EuiComboBox
-        compressed
+        compressed={true}
         placeholder={i18n.translate('visDefaultEditor.controls.field.selectFieldPlaceholder', {
           defaultMessage: 'Select a field',
         })}

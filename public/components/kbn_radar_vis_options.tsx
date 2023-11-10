@@ -17,20 +17,14 @@
  * under the License.
  */
 
-import { some } from 'lodash';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { i18n } from '@osd/i18n';
 import { FormattedMessage } from '@osd/i18n/react';
-import { EuiButtonEmpty, EuiDragDropContext, euiDragDropReorder, EuiDroppable, EuiFlexGroup, EuiFlexItem, EuiFormErrorText, EuiIconTip, EuiPanel, EuiSpacer, EuiTitle } from '@elastic/eui';
+import { EuiPanel, EuiSpacer, EuiTitle } from '@elastic/eui';
 
-import { IAggConfigs } from '../../../../src/plugins/data/public';
 import { VisOptionsProps } from '../../../../src/plugins/vis_default_editor/public';
-import { NumberInputOption, SelectOption } from '../../../../src/plugins/charts/public';
+import { NumberInputOption } from '../../../../src/plugins/charts/public';
 import { SwitchOption } from './switch';
-import { TextInputOption } from './text_input';
-import { totalAggregations, AggTypes } from './utils';
-import { array } from 'fp-ts';
-
 
 export interface KbnRadarVisParams {
   type: 'radar';

@@ -21,14 +21,13 @@ import { i18n } from '@osd/i18n';
 import { AggGroupNames } from '../../../src/plugins/data/public';
 import { Schemas } from '../../../src/plugins/vis_default_editor/public';
 
-import tableVisTemplate from './kbn-radar-vis.html';
-import { getKbnRadarVisualizationController } from './vis_controller';
 import { kbnRadarRequestHandler } from './data_load/kbn-radar-request-handler';
 import { kbnRadarResponseHandler } from './data_load/kbn-radar-response-handler';
 import { KbnRadarOptions } from './components/kbn_radar_vis_options_lazy';
 import { VIS_EVENT_TO_TRIGGER } from '../../../src/plugins/visualizations/public';
 import './index.scss'
 import image from './images/icon-radar.svg';
+import { RadarVis } from './components/radar_vis';
 
 
 // define the visType object, which kibana will use to display and configure new Vis object of this type.
@@ -43,7 +42,6 @@ export function kbnRadarVisTypeDefinition(core, context) {
     description: i18n.translate('visTypeKbnRadar.visDescription', {
       defaultMessage: 'Spyder nets with the radar visualization'
     }),
-    visualization: getKbnRadarVisualizationController(core, context),
     getSupportedTriggers: () => {
       return [VIS_EVENT_TO_TRIGGER.filter];
     },
@@ -72,7 +70,7 @@ export function kbnRadarVisTypeDefinition(core, context) {
         rangesMetrics_9_from: 0,
         rangesMetrics_9_to: 100,
       },
-      template: tableVisTemplate
+      component: RadarVis
     },
     editorConfig: {
       optionsTemplate: KbnRadarOptions,

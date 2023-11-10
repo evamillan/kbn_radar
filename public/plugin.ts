@@ -16,15 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { PluginInitializerContext, CoreSetup, CoreStart, Plugin } from '../../../src/core/public';
+import { CoreSetup, CoreStart, Plugin } from '../../../src/core/public';
 import { VisualizationsSetup } from '../../../src/plugins/visualizations/public';
 
 import { kbnRadarVisTypeDefinition } from './kbn-radar-vis';
 
 import { DataPublicPluginStart } from '../../../src/plugins/data/public';
-import { setFormatService, setOpensearchDashboardsLegacy, setNotifications, setQueryService, setSearchService } from './services';
-import { OpensearchDashboardsLegacyStart } from '../../../src/plugins/opensearch_dashboards_legacy/public';
-
+import { setFormatService, setNotifications, setQueryService, setSearchService } from './services';
 
 /** @internal */
 export interface TablePluginSetupDependencies {
@@ -34,31 +32,22 @@ export interface TablePluginSetupDependencies {
 /** @internal */
 export interface TablePluginStartDependencies {
   data: DataPublicPluginStart;
-  opensearchDashboardsLegacy: OpensearchDashboardsLegacyStart;
 }
 
 /** @internal */
 export class KbnRadarPlugin implements Plugin<Promise<void>, void> {
-  initializerContext: PluginInitializerContext;
   createBaseVisualization: any;
 
-  constructor(initializerContext: PluginInitializerContext) {
-    this.initializerContext = initializerContext;
-  }
-
   public async setup(
-    core: CoreSetup,
-    { visualizations }: TablePluginSetupDependencies
+    core: CoreSetup, { visualizations }: TablePluginSetupDependencies
   ) {
-    visualizations.createBaseVisualization(
-      kbnRadarVisTypeDefinition(core, this.initializerContext)
+    visualizations.createReactVisualization(
+      kbnRadarVisTypeDefinition()
     );
-
   }
 
-  public start(core: CoreStart, { data, opensearchDashboardsLegacy }: TablePluginStartDependencies) {
+  public start(core: CoreStart, { data }: TablePluginStartDependencies) {
     setFormatService(data.fieldFormats);
-    setOpensearchDashboardsLegacy(opensearchDashboardsLegacy);
     setNotifications(core.notifications);
     setQueryService(data.query);
     setSearchService(data.search);

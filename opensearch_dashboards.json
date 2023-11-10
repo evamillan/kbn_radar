@@ -1,7 +1,7 @@
 {
   "id": "kbnRadar",
   "version": "1.0.0",
-  "opensearchDashboardsVersion": "2.7.0",
+  "opensearchDashboardsVersion": "2.11.0",
   "server": false,
   "ui": true,
   "requiredPlugins": [
@@ -9,7 +9,6 @@
     "data",
     "inspector",
     "opensearchDashboardsUtils",
-    "opensearchDashboardsLegacy",
     "visDefaultEditor",
     "share",
     "charts"
